@@ -12,7 +12,7 @@ public class BonusService {
 				.multiply(new BigDecimal("0.1"));
 		
 		if (valor.compareTo(new BigDecimal("1000")) > 0) {
-			throw new IllegalArgumentException("Funcionario com salario maior do que R$1000 nao pode receber bonus!");
+			throw new IllegalArgumentException("Bônus não disponivel para essa faixa salarial");
 		}
 		
 		return valor.setScale(2, RoundingMode.HALF_UP);

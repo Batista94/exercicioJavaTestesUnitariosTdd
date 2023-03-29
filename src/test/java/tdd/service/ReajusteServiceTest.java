@@ -5,22 +5,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import tdd.modelo.Desempenho;
 import tdd.modelo.Funcionario;
-import tdd.service.ReajusteService;
 
 public class ReajusteServiceTest {
 	
+	private ReajusteService service;
+	private Funcionario fulano;
+	
+	@BeforeEach
+	public void inicialiar() {
+		this.service = new ReajusteService();
+		this.fulano = fulano = new Funcionario("Fulano", 
+							LocalDate.now(), 
+							new BigDecimal("2000.00"));			
+	}
+
 	@Test
 	void reajusteDeveriaSerDeTresPorcentoQuandoDesempenhoForADesejar() {
-		ReajusteService service = new ReajusteService();
-		Funcionario fulano = 
-				new Funcionario("Fulano", 
-						LocalDate.now(), 
-						new BigDecimal("2000.00"));
-		
 		service.concederReajuste(fulano, 
 				Desempenho.A_DESEJAR);
 		
@@ -30,12 +35,6 @@ public class ReajusteServiceTest {
 	
 	@Test
 	void reajusteDeveriaSerDeQuinzePorcentoQuandoDesempenhoForBom() {
-		ReajusteService service = new ReajusteService();
-		Funcionario fulano = 
-				new Funcionario("Fulano", 
-						LocalDate.now(), 
-						new BigDecimal("2000.00"));
-		
 		service.concederReajuste(fulano, 
 				Desempenho.BOM);
 		
@@ -44,13 +43,7 @@ public class ReajusteServiceTest {
 	}
 	
 	@Test
-	void reajusteDeveriaSerDeVintePorcentoQuandoDesempenhoForOtimo() {
-		ReajusteService service = new ReajusteService();
-		Funcionario fulano = 
-				new Funcionario("Fulano", 
-						LocalDate.now(), 
-						new BigDecimal("2000.00"));
-		
+	void reajusteDeveriaSerDeVintePorcentoQuandoDesempenhoForOtimo() {		
 		service.concederReajuste(fulano, 
 				Desempenho.OTIMO);
 		
